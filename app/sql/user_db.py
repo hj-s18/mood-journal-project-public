@@ -1,4 +1,4 @@
-from app.db import DBConnect
+from app.sql.db_connect import DBConnect
     
 class UserDAO:
     def insert_user(self, email, password, name):
