@@ -1,6 +1,7 @@
 from app.sql.db_connect import DBConnect
     
 class UserDAO:
+    #USER INSERT
     def insert_user(self, email, password, name):
         cursor = DBConnect.get_db().cursor()
         sql_insert = 'insert into users (email, password, name) values (%s, %s, %s)'
@@ -9,6 +10,7 @@ class UserDAO:
 
         return f'insert OK : {ret_cnt}'
 
+    #USER SELECT
     def get_users(self):
         ret = []
         cursor = DBConnect.get_db().cursor()
