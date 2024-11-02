@@ -35,6 +35,39 @@ class UserDAO:
             DBConnect.get_db().close()
             
         return ret
+    
+    def update_user(self, user_id, email, password, name):
+        cursor = DBConnect.get_db().cursor()
+        sql_update = 'UPDATE users SET email=%s, password=%s, name=%s WHERE id=%s'
+        ret_cnt = cursor.execute(sql_update, (email, password, name, user_id))
+        DBConnect.get_db().commit()
+        DBConnect.get_db().close()
+        return f'Update OK: {ret_cnt} row(s) affected'
+
+    def get_user_by_id(self, user_id):
+        cursor = DBConnect.get_db().cursor()
+        sql_select = 'SELECT * FROM users WHERE id=%s'
+        cursor.execute(sql_select, (user_id,))
+        row = cursor.fetchone()
+        
+        if row:
+            return {'id': row[0], 'email': row[1], 'password': row[2], 'name': row[3]}
+        
+        DBConnect.get_db().close()
+        return None
+    
+    
+    def get_user_by_email(self, email):
+        cursor = DBConnect.get_db().cursor()
+        sql_select = 'SELECT * FROM users WHERE email=%s'
+        cursor.execute(sql_select, (email,))
+        row = cursor.fetchone()
+        
+        if row:
+            return {'id': row[0], 'email': row[1], 'password': row[2], 'name': row[3]}
+        
+        DBConnect.get_db().close()
+        return None
 
 if __name__ == '__main__':
     user_list = UserDAO().get_users()

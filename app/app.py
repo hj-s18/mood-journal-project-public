@@ -2,7 +2,9 @@ import logging
 from flask import Flask
 from .route.auth_route import auth_bp
 from .route.sign_route import signup
-
+from .route.sign_update_route import update_bp
+from .route.login_route import login_bp
+from app.route.home_route import home_bp
 
 def create_app():
     app = Flask(__name__)
@@ -19,5 +21,11 @@ def create_app():
     app.register_blueprint(auth_bp)
     
     app.register_blueprint(signup)
+    
+    app.register_blueprint(update_bp)
+    
+    app.register_blueprint(login_bp)
+    
+    app.register_blueprint(home_bp)
 
     return app
