@@ -8,13 +8,8 @@
 from app.sql.db_connect import DBConnect
     
 class DiaryDAO:
-    def upsert_diary(self, email, password, name):
-        cursor = DBConnect.get_db().cursor()
-        sql_insert = 'insert into users (email, password, name) values (%s, %s, %s)'
-        ret_cnt = cursor.execute(sql_insert, (email, password, name))
-        DBConnect.get_db().close()
-
-        return f'insert OK : {ret_cnt}'
+    def upsert_diary(self, email, password, name, mola):
+        return f'insert OK :'
 
     def delete_diary(self):
         ret = []

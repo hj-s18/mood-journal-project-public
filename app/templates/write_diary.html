@@ -75,38 +75,37 @@
 </div>
 
 <!-- 이미지 선택 섹션 -->
-<div class="image-selection">
-   <label>
-       <input type="radio" name="mood" value="happy">
-       <img src="/static/images/happy.png" alt="행복한 이모지">
-   </label>
-   <label>
-       <input type="radio" name="mood" value="neutral">
-       <img src="/static/images/neutral.png" alt="중립 이모지">
-   </label>
-   <label>
-       <input type="radio" name="mood" value="sad">
-       <img src="/static/images/sad.png" alt="슬픈 이모지">
-   </label>
-   <label>
-       <input type="radio" name="mood" value="angry">
-       <img src="/static/images/angry.png" alt="화난 이모지">
-   </label>
-   <label>
-       <input type="radio" name="mood" value="excited">
-       <img src="/static/images/excited.png" alt="신난 이모지">
-   </label>
-</div>
+<form class="diary-form" method="POST" action="{{ url_for('diary.write_diary', day=day) }}">
 
-<!-- 일기 작성 폼 -->
-<div class="diary-form">
-   <textarea placeholder="여기에 일기를 작성하세요..."></textarea>
+    <div class="image-selection">
+        <label>
+            <input type="radio" name="mood" value=0>
+            <img src="/static/images/happy.png" alt="행복한 이모지">
+        </label>
+        <label>
+            <input type="radio" name="mood" value=1>
+            <img src="/static/images/neutral.png" alt="중립 이모지">
+        </label>
+        <label>
+            <input type="radio" name="mood" value=2>
+            <img src="/static/images/sad.png" alt="슬픈 이모지">
+        </label>
+        <label>
+            <input type="radio" name="mood" value=3>
+            <img src="/static/images/angry.png" alt="화난 이모지">
+        </label>
+        <label>
+            <input type="radio" name="mood" value=4>
+            <img src="/static/images/excited.png" alt="신난 이모지">
+        </label>
+    </div>
+    <textarea name="body" placeholder="여기에 일기를 작성하세요..."></textarea>
    
    <!-- 버튼들 -->
-   <div>
-       <button type="submit">저장</button>
-       <button type="button" class="delete">삭제</button>
-   </div>
-</div>
+    <div>
+        <button type="submit">저장</button>
+        <button type="button" class="delete">삭제</button>
+    </div>
+</form>
 
 {% endblock %}

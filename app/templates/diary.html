@@ -88,28 +88,24 @@
    <a href="/diary?year={{ year }}&month={{ month + 1 }}">&#9654;</a>
 </div>
 
-<!-- 타임라인 -->
 <div class="timeline">
-   <!-- 날짜 리스트 -->
-   <div class="date-list">
-       {% for day in days_in_month %}
-           <div class="date-item">
-               <a href="{{ url_for('diary.write_diary', year=year, month=month, day=day) }}">
-                   <span class="date-box">{{ '%02d' % month }}.{{ '%02d' % day }}</span> 
-                   <span class="mood">
-                        {% if day in diaries %}
-                            {{ diaries[day]['mood'] }}
-                        {% endif %}
-                    </span>
-                    <span class="message">
-                        {% if day in diaries %}
-                            {{ entries_dict[day]['message'] }}
-                        {% endif %}
-                    </span>
-                </a>
-           </div>
-       {% endfor %}
-   </div>
-</div>
-
-{% endblock %}
+    <!-- 날짜 리스트 -->
+    <div class="date-list">
+        {% for day in days_in_month %}
+            <div class="date-item">
+                {% if day in diaries %}
+                    <a href="{{ url_for('diary.write_diary', id=diaries[day]['id'], year=year, month=month, day=day) }}">
+                        <span class="date-box">{{ '%02d' % month }}.{{ '%02d' % day }}</span> 
+                        <span class="mood">{{ diaries[day]['mood'] }}</span>
+                        <span class="message">{{ entries_dict[day]['message'] }}</span>
+                    </a>
+                {% else %}
+                    <!-- 일기가 없는 경우 -->
+                    <span class="date-box">{{ '%02d' % month }}.{{ '%02d' % day }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+ </div>
+ {% endblock %}
+ 
