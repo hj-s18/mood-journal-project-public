@@ -16,7 +16,10 @@
         {% if messages %}
             <ul>
             {% for message in messages %}
+                <!-- "환영합니다" 문구가 포함된 플래시 메시지는 제외 -->
+                {% if '환영합니다' not in message %}
                 <li>{{ message }}</li>
+                {% endif %}
             {% endfor %}
             </ul>
         {% endif %}

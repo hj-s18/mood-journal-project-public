@@ -29,6 +29,8 @@ def login_user():
 
         # 로그인 성공 시 세션에 사용자 정보 저장 (예: 사용자 ID)
         session['user_id'] = user_info['id']
+        
+        # 환영 메시지를 플래시로 추가 (필요에 따라 제거 가능)
         flash(f'{user_info["name"]}님 환영합니다!')
         
         return redirect(url_for('home.home'))  # 로그인 후 home 페이지로 리다이렉트
