@@ -11,4 +11,4 @@ def home():
         return render_template('home.html', user_id=session['user_id'])
     else:
         # 로그인되지 않은 경우 로그인 페이지로 리다이렉트
-        return redirect(url_for('auth.login_form'))
+        return redirect(url_for('auth.login_user'))
