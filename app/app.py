@@ -4,7 +4,8 @@ from .route.auth_route import auth_bp
 from .route.sign_route import signup
 from .route.sign_update_route import update_bp
 from .route.login_route import login_bp
-from app.route.home_route import home_bp
+from .route.home_route import home_bp
+from .route.delete_route import delete_bp
 
 def create_app():
     app = Flask(__name__)
@@ -28,4 +29,6 @@ def create_app():
     
     app.register_blueprint(home_bp)
 
+    app.register_blueprint(delete_bp)
+    
     return app

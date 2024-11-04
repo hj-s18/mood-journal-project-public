@@ -45,7 +45,7 @@ input[type="email"], input[type="password"], input[type="text"] {
     box-sizing: border-box; /* 패딩 포함 너비 계산 */
 }
 /* 버튼 스타일 */
-input[type="submit"], button {
+input[type="submit"], button{
     width: 100%;
     padding: 12px;
     font-size: 15px;
@@ -58,7 +58,25 @@ input[type="submit"], button {
     margin-top: 10px;
     box-sizing: border-box; /* 패딩 포함 너비 계산 */
 }
+
+/* auth/delete의 취소버튼 */
+a#cancel-button {
+    display: inline-block;    /* 가로, 세로 크기 조정 가능하게 만듦 */
+    width: 100%;
+    padding: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #555555;
+    background-color: #FFD1DC; /* 밝은 파스텔 분홍색 */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    box-sizing: border-box; /* 패딩 포함 너비 계산 */
+    text-decoration: none;
+}
+
 /* 버튼 호버 효과 */
-input[type="submit"]:hover, button:hover {
+input[type="submit"]:hover, button:hover, a#cancel-button:hover {
     background-color: #FFB6C1; /* 약간 진한 분홍색 */
 }

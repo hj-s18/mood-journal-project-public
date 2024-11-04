@@ -70,6 +70,19 @@ class UserDAO:
         
         DBConnect.get_db().close()
         return None
+    
+    #USER DELETE
+    def delete_user(self, user_id):
+        cursor = DBConnect.get_db().cursor()
+        sql_delete = 'DELETE FROM users WHERE id=%s'
+        ret_cnt = cursor.execute(sql_delete, (user_id,))
+        DBConnect.get_db().commit()
+        DBConnect.get_db().close()
+        
+        if ret_cnt > 0:
+            return f'User ID {user_id} deleted successfully.'
+        else:
+            return 'User not found.'
 
 if __name__ == '__main__':
     user_list = UserDAO().get_users()
