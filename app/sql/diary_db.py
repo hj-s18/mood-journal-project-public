@@ -91,21 +91,96 @@ class DiaryDAO:
         finally :
             db.close()
         
+        
+        
+        
+        
 
-    # def get_list_diaries_with_date(self):
+    def get_list_diaries_with_date(self, user_id, year, month):
+        start_date = f"{year}-{month}-01"
+        end_date = f"{year}-{month + 1}-01"
 
+        ret = []
+        db = DBConnect.get_db()
+        cursor = db.cursor()
+        sql_select = "select * from diaries where date >= %s and date < %s and user_id = %s"
+
+        try :
+            cursor.execute(sql_select, (start_date, end_date, user_id))            
+            rows = cursor.fetchall()
             
+            for row in rows:
+                temp = {
+                    'id' : row[0],
+                    'mood' : row[2],
+                    'body' : row[3],
+                    'file_urls' : row[4],
+                    'date' : row[5]
+                }
+                ret.append(temp)
+            
+            return ret
+        except Exception as e:
+            print("get_list_diaries_with_date Error :", e)
+        finally :
+            db.close() 
 
-    # def get_list_diaries_with_mood(self):
-    #     return
-    
-    # def get_diary(self):
-    #     return
-    
+
+    def get_list_diaries_with_mood(self, user_id, mood_choice):
+        ret = []
+        db = DBConnect.get_db()
+        cursor = db.cursor()
+        
+        try :
+            # mood_choice = int(input("0~4 기분을 고르세요. >>>"))
+            if mood_choice not in range(0,5) :
+                print("유효하지 않은 기분 값입니다.")
+                return ret 
+            
+            sql_select = "select * from diaries where mood = %s and user_id = %s"
+            cursor.execute(sql_select, (mood_choice, user_id))
+            rows = cursor.fetchall()
+            
+            for row in rows :
+                temp = {
+                    'id' : row[0],
+                    'mood' : row[2],
+                    'body' : row[3],
+                    'file_urls' : row[4],
+                    'date' : row[5]
+                }
+                ret.append(temp)
+            return ret
+                
+        except Exception as e:
+            print("get_list_diaries_with_date Error :", e)
+        finally :
+            db.close() 
+            
+                
+                
+    def get_diary(self):
+        ret = []
+        db = DBConnect.get_db()
+        cursor = db.cursor()
+        sql_select = 'select * from diaries'
+        
+        # try :
+            
+        # except Exception as e:
+        #     print("get_list_diaries_with_date Error :", e)
+        # finally :
+        #     db.close() 
+            
+            
+                
 if __name__ == '__main__':
     
     # DiaryDAO().delete_diary(4)
     # DiaryDAO().upsert_diary(1, 0, "testbody", "testfiles", "2024-11-04")
+    # print(DiaryDAO().get_list_diaries_with_date(1, 2024, 10))
+    print(DiaryDAO().get_list_diaries_with_mood(1, 1))
+
     
-    diaries_list = DiaryDAO().get_diaries()
-    print(diaries_list)
+    # diaries_list = DiaryDAO().get_diaries()
+    # print(diaries_list)
