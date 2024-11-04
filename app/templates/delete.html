@@ -10,6 +10,7 @@
 <body>
     <div class="container">
         <h1>회원 탈퇴</h1>
+        
         <!-- Flash 메시지 표시 -->
         {% with messages = get_flashed_messages() %}
         {% if messages %}
@@ -27,7 +28,7 @@
             
             <button type="submit">탈퇴하기</button>
 
-            <a id="cancel-button" href="/home">취소</a> <!-- 취소 버튼은 홈으로 리다이렉트 -->
+            <a id="cancel-button" href="/auth/home">취소</a> <!-- 취소 버튼은 홈으로 리다이렉트 -->
         </form>
     </div>
 </body>
