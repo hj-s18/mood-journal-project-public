@@ -1,0 +1,81 @@
+/* 전체 페이지 스타일 */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFE4E1;
+}
+
+/* 출석 체크 컨테이너 스타일 */
+.attendance-container {
+    background-color: #FFF7F3;
+    padding: 40px 60px;
+    border-radius: 10px;
+    width: 500px;
+    text-align: center;
+    border: 2px solid #FFB6C1;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 스타일 */
+h2 {
+    color: #FFB6C1;
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+
+/* 출석 체크 테이블 스타일 */
+.attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #FFF7F3;
+}
+
+.attendance-table th, .attendance-table td {
+    border: 1px solid #FFD1DC;
+    padding: 10px;
+    font-size: 14px;
+    color: #555555;
+    background-color: #FFF7F3;
+}
+
+.attendance-table th {
+    background-color: #FFB6C1;
+    color: #ffffff;
+}
+
+.attendance-table td input[type="checkbox"] {
+    transform: scale(1.5);
+    cursor: not-allowed;
+}
+
+/* 오늘 출석 버튼 스타일 */
+form button.save-button {
+    padding: 12px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #555555;
+    background-color: #FFD1DC;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block; /* 글자 수에 맞게 너비 조정 */
+}
+
+/* 호버 효과 */
+form button.save-button:hover {
+    background-color: #FFB6C1;
+}
+
+/* 출석 완료 메시지 스타일 */
+.completion-message {
+    color: #fd5acc;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+}

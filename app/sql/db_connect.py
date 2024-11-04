@@ -5,7 +5,7 @@ class DBConnect:
     def get_db(self):
         return pymysql.connect(
             user="root",
-            passwd="qwer1234",
+            passwd="ssafy",
             host="127.0.0.1",
             db="mood_journal_project",
             charset="utf8",

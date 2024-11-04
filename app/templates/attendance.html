@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}출석 체크 페이지{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/attendance.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="attendance-container">
+   <h2>이번 주 출석 체크</h2>
+
+   <!-- 오늘 출석 여부에 따른 메시지 또는 버튼 -->
+   {% if today_attendance %}
+       <p class="completion-message">출석을 완료했습니다!</p>
+   {% else %}
+       <form action="{{ url_for('attendance.mark_attendance') }}" method="post">
+           <button type="submit" class="save-button">오늘 출석</button>
+       </form>
+   {% endif %}
+
+   <!-- 이번 주의 요일과 날짜를 표시하는 표 -->
+   <table class="attendance-table">
+       <thead>
+           <tr>
+               <th>요일</th>
+               <th>날짜</th>
+               <th>출석 여부</th>
+           </tr>
+       </thead>
+       <tbody>
+           {% for day in week_days %}
+           <tr>
+               <td>{{ day.weekday }}</td>
+               <td>{{ day.date }}</td>
+               <td><input type="checkbox" {% if day.attended %}checked{% endif %} disabled></td>
+           </tr>
+           {% endfor %}
+       </tbody>
+   </table>
+</div>
+
+{% endblock %}
