@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Flask 프로젝트{% endblock %}</title>
+
+    {% block head %}{% endblock %} <!-- 외부 CSS 및 추가 스타일을 위한 head 블록 -->
+
     <style>
         body {
             display: flex;
@@ -50,9 +53,9 @@
     <div class="menu">
         <h2>Home</h2>
         <ul>
-            <!-- Blueprint 이름과 함수 이름을 함께 사용 -->
+            <!-- 다른 페이지로의 링크 -->
             <li><a href="{{ url_for('diary.diary_home') }}">일기</a></li>
-            <li><a href="{{ url_for('attendance.attendance_home') }}">출석 체크</a></li> <!-- 출석 체크 메뉴 추가 -->
+            <li><a href="{{ url_for('attendance.attendance_home') }}">출석 체크</a></li>
         </ul>
     </div>
 
