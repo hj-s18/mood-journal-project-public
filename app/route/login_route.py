@@ -4,12 +4,12 @@ from app.sql.user_db import UserDAO
 login_bp = Blueprint('login', __name__)
 
 # 로그인 폼을 보여주는 GET 요청 처리
-@login_bp.route('/login', methods=['GET'])
+@login_bp.route('/auth/login', methods=['GET'])
 def login_form():
     return render_template('login.html')  # login.html 템플릿 렌더링
 
 # 로그인 처리를 위한 POST 요청 처리
-@login_bp.route('/login', methods=['POST'])
+@login_bp.route('/auth/login', methods=['POST'])
 def login_user():
     email = request.form.get('email')
     password = request.form.get('password')

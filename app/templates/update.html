@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-       <!-- CSS 파일 적용 -->
-       <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+    <!-- CSS 파일 적용 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
     <title>회원정보 수정</title>
 </head>
 <body>
@@ -22,21 +22,27 @@
         {% endif %}
         {% endwith %}
 
-        <!-- 회원정보 수정 폼 -->
-        <form action="/update" method="POST">
-            <!-- 숨겨진 필드로 사용자 ID 전달 -->
-            <input type="hidden" name="id" value="{{ user.id }}">
+        <form action="/auth/update" method="POST">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" id="name" name="name" value="{{ user.name }}" required></td>
+                </tr>
 
-            <label for="email">이메일:</label>
-            <input type="email" id="email" name="email" value="{{ user.email }}" required><br><br>
-
-            <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" value="{{ user.password }}" required><br><br>
-
-            <label for="name">이름:</label>
-            <input type="text" id="name" name="name" value="{{ user.name }}" required><br><br>
-
-            <button type="submit">수정하기</button>
+                <tr>
+                    <td>e-mail</td>
+                    <td><input type="email" id="email" name="email" value="{{ user.email }}" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password" name="password" value="{{ user.password }}" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                      <button type="submit">수정하기</button>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 </body>

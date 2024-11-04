@@ -36,6 +36,7 @@ class UserDAO:
             
         return ret
     
+    #USER UPDATE
     def update_user(self, user_id, email, password, name):
         cursor = DBConnect.get_db().cursor()
         sql_update = 'UPDATE users SET email=%s, password=%s, name=%s WHERE id=%s'
@@ -44,6 +45,7 @@ class UserDAO:
         DBConnect.get_db().close()
         return f'Update OK: {ret_cnt} row(s) affected'
 
+    #USER SELECT 2
     def get_user_by_id(self, user_id):
         cursor = DBConnect.get_db().cursor()
         sql_select = 'SELECT * FROM users WHERE id=%s'

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS 파일 적용 -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
-    <title>로그인</title>
+    <title>LOGIN</title>
 </head>
 <body>
     <div class="container">
-        <h1>로그인</h1>
+        <h1>Login</h1>
 
         <!-- Flash 메시지 표시 -->
         {% with messages = get_flashed_messages() %}
@@ -22,15 +22,25 @@
         {% endif %}
         {% endwith %}
 
-        <!-- 로그인 폼 -->
-        <form action="/login" method="POST">
-            <label for="email">이메일 ID:</label>
-            <input type="email" id="email" name="email" required><br><br>
-
-            <label for="password">비밀번호:</label>
-            <input type="password" id="password" name="password" required><br><br>
-
-            <button type="submit">로그인</button>
+        <form action="/auth/login" method="POST">
+            <table>
+                <tr>
+                    <td>e-mail</td>
+                    <td><input type="email" id="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password" name="password" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="로그인"></input>
+                        <a href="/auth/signup"> 
+                            <button h type="button">회원가입</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
         </form>
     </div>
 </body>

@@ -5,7 +5,7 @@ from app.sql.user_db import UserDAO
 update_bp = Blueprint('update', __name__)
 
 # 회원정보 수정 폼을 보여주는 GET 요청 처리
-@update_bp.route('/update', methods=['GET'])
+@update_bp.route('/auth/update', methods=['GET'])
 def update_form():
     # 세션에서 사용자 ID를 가져옴
     user_id = session.get('user_id')
@@ -29,7 +29,7 @@ def update_form():
         return redirect(url_for('login.login_form'))
 
 # 회원정보 수정을 위한 POST 요청 처리
-@update_bp.route('/update', methods=['POST'])
+@update_bp.route('/auth/update', methods=['POST'])
 def update_user():
     # 세션에서 사용자 ID를 가져옴
     user_id = session.get('user_id')
