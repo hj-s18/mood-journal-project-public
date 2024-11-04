@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}출석 체크 페이지{% endblock %}
+
+{% block content %}
+
+<!-- 인라인 CSS -->
+<style>
+    .attendance-container {
+        max-width: 600px;
+        margin: 40px auto;
+        text-align: center;
+    }
+
+    .attendance-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .attendance-table th, .attendance-table td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+    }
+
+    .attendance-table th {
+        background-color: #f4f4f4;
+    }
+
+    .attendance-table td input[type="checkbox"] {
+        transform: scale(1.5); /* 체크박스 크기 조정 */
+    }
+
+    .submit-buttons {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .submit-buttons button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-right: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+
+    .submit-buttons .save-button {
+        background-color: #4CAF50; /* 저장 버튼 색상 */
+        color: white;
+    }
+
+</style>
+
+<div class="attendance-container">
+   <h2>이번 주 출석 체크</h2>
+
+   <!-- 출석 버튼 -->
+   <button class="save-button">오늘 출석</button>
+
+   <!-- 이번 주의 요일과 날짜를 표시하는 표 -->
+   <table class="attendance-table">
+       <thead>
+           <tr>
+               <th>요일</th>
+               <th>날짜</th>
+               <th>출석 여부</th>
+           </tr>
+       </thead>
+       <tbody>
+           {% for day in week_days %}
+           <tr>
+               <td>{{ day.weekday }}</td>
+               <td>{{ day.date }}</td>
+               <td><input type="checkbox" {% if day.attended %}checked{% endif %}></td>
+           </tr>
+           {% endfor %}
+       </tbody>
+   </table>
+</div>
+
+{% endblock %}
