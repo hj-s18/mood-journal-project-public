@@ -51,5 +51,4 @@ class DiaryDAO:
         return
     
 if __name__ == '__main__':
-    user_list = UserDAO().get_users()
-    print(user_list)
+    print()

@@ -22,29 +22,24 @@
         font-size: 24px;
     }
 
-    /* 타임라인 중앙 정렬 */
     .timeline {
-        width: 100%;
+        width: 100vw; /* 타임라인이 화면 전체 너비를 차지하도록 설정 */
     }
 
-    /* 날짜 리스트 중앙 정렬 */
     .date-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* 날짜 리스트 수평 중앙 정렬 */
-        width: 100%; /* 전체 화면을 차지하도록 설정 */
+        width: 100vw; /* 날짜 리스트도 화면 전체 너비를 차지하도록 설정 */
     }
 
     .date-item {
         display: flex;
         align-items: center;
-        justify-content: space-between; /* 날짜와 메시지를 양쪽으로 배치 */
-        width: 100%; /* 호버 범위를 넓혀서 화면 전체를 차지하도록 설정 */
-        padding: 10px;
+        justify-content: space-between;
+        width: 100vw; /* 날짜 아이템이 화면 전체 너비를 차지하도록 설정 */
+        padding: 10px 20px; /* 여백을 유지하면서 클릭 가능한 영역을 확장 */
         margin-bottom: 10px;
-        background-color: #f9f9f9; /* 기본 배경색 */
-        border-radius: 8px; /* 둥근 모서리 */
-        transition: background-color 0.3s ease; /* 부드러운 전환 효과 */
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
     }
 
     /* 날짜 아이템에 호버 효과 추가 */
@@ -99,13 +94,19 @@
    <div class="date-list">
        {% for day in days_in_month %}
            <div class="date-item">
-               <!-- 호버된 전체 영역을 클릭할 수 있도록 변경 -->
                <a href="{{ url_for('diary.write_diary', year=year, month=month, day=day) }}">
-                   <!-- 월과 일을 함께 출력 -->
                    <span class="date-box">{{ '%02d' % month }}.{{ '%02d' % day }}</span> 
-                   <span class="emoji">😊</span> 
-                   <span class="message">오늘 하루도 행복하세요! 오늘 하루도 행복하세요! 오늘 하루도 행복하세요!</span>
-               </a>
+                   <span class="mood">
+                        {% if day in diaries %}
+                            {{ diaries[day]['mood'] }}
+                        {% endif %}
+                    </span>
+                    <span class="message">
+                        {% if day in diaries %}
+                            {{ entries_dict[day]['message'] }}
+                        {% endif %}
+                    </span>
+                </a>
            </div>
        {% endfor %}
    </div>

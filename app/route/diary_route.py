@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template, request
+from flask import *
 from datetime import datetime, timedelta
+from ..sql.diary_db import DiaryDAO
 
-# Diary 관련 Blueprint 생성 (url_prefix로 '/diary' 경로 설정)
 diary_bp = Blueprint('diary', __name__, url_prefix="/diary")
 
-# 년월에 맞는 날짜 리스트 생성 함수
 def generate_dates(year, month):
     first_day = datetime(year, month, 1)
     if month == 12:
@@ -37,13 +36,33 @@ def diary_home():
     return render_template('diary.html', year=year, month=month, days_in_month=days_in_month)
 
 # 특정 날짜에 대한 일기 작성 페이지 라우트
-@diary_bp.route('/write/<day>')
+@diary_bp.route('/write/<day>', methods=["DELETE", "GET", "POST"])
 def write_diary(day):
-    # 현재 연도와 월을 가져옵니다.
     year = request.args.get('year', datetime.now().year, type=int)
     month = request.args.get('month', datetime.now().month, type=int)
 
-    print(year)
-    print(month)
+    if request.method == "GET":            
+        return render_template('write_diary.html', year=year, month=month, day=day)
+    elif request.method == "POST":
+        # 날짜 포맷팅
+        formatted_date = datetime(year, month, day).strftime('%Y-%m-%d')
+        
+        DiaryDAO().upsert_diary()
+    else:
+        return
 
-    return render_template('write_diary.html', year=year, month=month, day=day)
+        
+
+@diary_bp.route('/<int:year>/<int:month>')
+def get_diaries(year, month):
+    days_in_month = [day for day in range(1, 32)]
+
+    diaries = DiaryDAO().get_list_diaries_with_date(year, month)
+    
+    return render_template(
+        'diary.html',
+        year=year,
+        month=month,
+        days_in_month=days_in_month,
+        diaries=diaries
+    )
