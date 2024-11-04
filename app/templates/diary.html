@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}일기 페이지{% endblock %}
+
+{% block content %}
+
+<!-- 인라인 CSS -->
+<style>
+    .header {
+        display: flex;
+        justify-content: center; /* 수평 중앙 정렬 */
+        align-items: center;     /* 수직 중앙 정렬 */
+        margin-bottom: 20px;
+        width: 100%;             /* 전체 너비 */
+    }
+    .header a {
+        margin: 0 20px;          /* 화살표와 년월 사이 간격 */
+        font-size: 24px;         /* 화살표 크기 */
+    }
+    .header h2 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    .timeline {
+        width: 100vw; /* 타임라인이 화면 전체 너비를 차지하도록 설정 */
+    }
+
+    .date-list {
+        width: 100vw; /* 날짜 리스트도 화면 전체 너비를 차지하도록 설정 */
+    }
+
+    .date-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100vw; /* 날짜 아이템이 화면 전체 너비를 차지하도록 설정 */
+        padding: 10px 20px; /* 여백을 유지하면서 클릭 가능한 영역을 확장 */
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    /* 날짜 아이템에 호버 효과 추가 */
+    .date-item:hover {
+        background-color: #e0e0e0; /* 호버 시 배경색 변경 */
+        cursor:pointer; /* 포인터 커서 추가 */
+    }
+
+    .date-item a {
+        text-decoration: none; /* 링크 밑줄 제거 */
+        color: inherit; /* 링크 텍스트 색상 상속 */
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .date-box {
+        width: 80px;
+        padding: 10px;
+        background-color: #ddd;
+        border-radius: 5px;
+        text-align: center;
+    }
+    
+    .emoji {
+        margin-left: 20px;
+        font-size: 24px; /* 이모지 크기 */
+    }
+    
+    .message {
+        margin-left: 20px;
+        font-size: 16px; 
+        flex-grow: 1; /* 메시지가 길어질 때 유연하게 확장되도록 설정 */
+    }
+</style>
+
+<div class="header">
+   <!-- 이전 버튼 -->
+   <a href="/diary?year={{ year }}&month={{ month - 1 }}">&#9664;</a>
+
+   <!-- 현재 년월 표시 -->
+   <h2>{{ year }}년 {{ '%02d' % month }}월</h2>
+
+   <!-- 다음 버튼 -->
+   <a href="/diary?year={{ year }}&month={{ month + 1 }}">&#9654;</a>
+</div>
+
+<div class="timeline">
+    <!-- 날짜 리스트 -->
+    <div class="date-list">
+        {% for day in days_in_month %}
+            <div class="date-item">
+                {% if day in diaries %}
+                    <a href="{{ url_for('diary.write_diary', id=diaries[day]['id'], year=year, month=month, day=day) }}">
+                        <span class="date-box">{{ '%02d' % month }}.{{ '%02d' % day }}</span> 
+                        <span class="mood">{{ diaries[day]['mood'] }}</span>
+                        <span class="message">{{ entries_dict[day]['message'] }}</span>
+                    </a>
+                {% else %}
+                    <!-- 일기가 없는 경우 -->
+                    <span class="date-box">{{ '%02d' % month }}.{{ '%02d' % day }}</span>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+ </div>
+ {% endblock %}
+ 

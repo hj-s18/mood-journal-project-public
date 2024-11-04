@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block title %}일기 작성 페이지{% endblock %}
+
+{% block content %}
+
+<!-- 인라인 CSS -->
+<style>
+    .header {
+        display: flex;
+        justify-content: center; /* 수평 중앙 정렬 */
+        align-items: center;     /* 수직 중앙 정렬 */
+        margin-bottom: 20px;
+        width: 100%;             /* 전체 너비 */
+    }
+    
+    .header h2 {
+        margin: 0;
+        font-size: 24px;
+    }
+
+    .diary-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .diary-form textarea {
+        width: 80%;
+        height: 200px;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .diary-form button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin-right: 10px;
+        border-radius: 5px;
+        border: none;
+        background-color: #4CAF50; /* 저장 버튼 색상 */
+        color: white;
+        cursor: pointer;
+    }
+
+    .diary-form button.delete {
+        background-color: #f44336; /* 삭제 버튼 색상 */
+    }
+
+    /* 이미지 선택 섹션 스타일링 */
+    .image-selection {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+
+    .image-selection label {
+        margin-right: 15px; /* 이미지 간격 */
+    }
+
+    .image-selection img {
+        width: 50px; /* 이미지 크기 */
+        height: 50px; 
+        border-radius: 50%; /* 원형 이미지 */
+    }
+</style>
+
+<div class="header">
+   <!-- 현재 날짜 표시 (문자열 그대로 출력) -->
+   <h2>{{ year }}년 {{ month }}월 {{ day }}일</h2>
+</div>
+
+<!-- 이미지 선택 섹션 -->
+<form class="diary-form" method="POST" action="{{ url_for('diary.write_diary', day=day) }}">
+
+    <div class="image-selection">
+        <label>
+            <input type="radio" name="mood" value=0>
+            <img src="/static/images/happy.png" alt="행복한 이모지">
+        </label>
+        <label>
+            <input type="radio" name="mood" value=1>
+            <img src="/static/images/neutral.png" alt="중립 이모지">
+        </label>
+        <label>
+            <input type="radio" name="mood" value=2>
+            <img src="/static/images/sad.png" alt="슬픈 이모지">
+        </label>
+        <label>
+            <input type="radio" name="mood" value=3>
+            <img src="/static/images/angry.png" alt="화난 이모지">
+        </label>
+        <label>
+            <input type="radio" name="mood" value=4>
+            <img src="/static/images/excited.png" alt="신난 이모지">
+        </label>
+    </div>
+    <textarea name="body" placeholder="여기에 일기를 작성하세요..."></textarea>
+   
+   <!-- 버튼들 -->
+    <div>
+        <button type="submit">저장</button>
+        <button type="button" class="delete">삭제</button>
+    </div>
+</form>
+
+{% endblock %}

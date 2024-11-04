@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Flask 프로젝트{% endblock %}</title>
+    <style>
+        body {
+            display: flex;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+        .menu {
+            width: 200px;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-right: 1px solid #ccc;
+            height: 100vh;
+            position: fixed; /* 메뉴 고정 */
+            top: 0;
+            left: 0;
+        }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .menu ul li {
+            margin-bottom: 10px;
+        }
+        .menu ul li a {
+            text-decoration: none;
+            color: black;
+            display: block;
+            padding: 10px;
+            background-color: transparent; /* 기본 배경색 없음 */
+            border-radius: 5px;
+        }
+        .menu ul li a:hover {
+            background-color: #ddd; /* 마우스 오버 시 배경색 */
+        }
+        .content {
+            margin-left: 220px; /* 메뉴 너비만큼 오른쪽으로 밀림 */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 왼쪽 고정된 메뉴 -->
+    <div class="menu">
+        <h2>Home</h2>
+        <ul>
+            <!-- Blueprint 이름과 함수 이름을 함께 사용 -->
+            <li><a href="{{ url_for('diary.diary_home') }}">일기</a></li>
+            <li><a href="{{ url_for('attendance.attendance_home') }}">출석 체크</a></li> <!-- 출석 체크 메뉴 추가 -->
+        </ul>
+    </div>
+
+    <!-- 오른쪽 본문 -->
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
