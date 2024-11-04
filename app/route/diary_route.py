@@ -38,18 +38,29 @@ def diary_home():
 # 특정 날짜에 대한 일기 작성 페이지 라우트
 @diary_bp.route('/write/<day>', methods=["DELETE", "GET", "POST"])
 def write_diary(day):
-    year = request.args.get('year', datetime.now().year, type=int)
-    month = request.args.get('month', datetime.now().month, type=int)
-
-    if request.method == "GET":            
-        return render_template('write_diary.html', year=year, month=month, day=day)
-    elif request.method == "POST":
-        # 날짜 포맷팅
-        formatted_date = datetime(year, month, day).strftime('%Y-%m-%d')
-        
-        DiaryDAO().upsert_diary()
-    else:
+    if "user_id" not in session:
+        # return redirect(url_for())
         return
+    else:
+        year = request.args.get('year', datetime.now().year, type=int)
+        month = request.args.get('month', datetime.now().month, type=int)
+
+        if request.method == 'GET':            
+            return render_template('write_diary.html', year=year, month=month, day=day)
+        elif request.method == 'POST':
+            user_id = session['user_id']
+            mood = request.form['mood']
+            body = request.form['body']
+            file_urls = request.form['file_urls']
+            formatted_date = datetime(year, month, day).strftime('%Y-%m-%d')
+            
+            DiaryDAO().upsert_diary(user_id, mood, body, file_urls, formatted_date)
+
+            return redirect(url_for('diary_home', year=year))
+
+            # return render_template('write_diary.html', year=year, month=month, day=day)
+        else:
+            return
 
         
 
