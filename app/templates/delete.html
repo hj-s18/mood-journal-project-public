@@ -1,12 +1,93 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- CSS 파일 적용 -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
-    <title>회원 탈퇴</title>
-</head>
+{% extends "base.html" %}
+
+{% block title %}회원 탈퇴{% endblock %}
+
+{% block content %}
+
+<style>
+    /* 페이지 전체 배경 및 폰트 스타일 */
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #FFE4E1; /* 파스텔 분홍 배경 */
+    }
+    /* 로그인 컨테이너 스타일 */
+    .container {
+        background-color: #FFF7F3; /* 연한 분홍 배경 */
+        padding: 40px 60px; /* 양옆 패딩 조정 */
+        border-radius: 10px;
+        width: 400px; /* 컨테이너 너비 */
+        text-align: center;
+        border: 2px solid #FFB6C1; /* 분홍 테두리 */
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 약간의 그림자 효과 */
+    }
+    /* 제목 스타일 */
+    h1 {
+        color: #FFB6C1; /* 파스텔 분홍색 */
+        font-size: 26px;
+        margin-bottom: 25px;
+    }
+    /* 테이블과 입력 필드 스타일 */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    td {
+        padding: 10px;
+        font-size: 14px;
+        color: #555555;
+    }
+    input[type="email"], input[type="password"], input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #FFD1DC; /* 연한 테두리 */
+        border-radius: 8px;
+        font-size: 14px;
+        background-color: #FFF7F3; /* 연한 분홍 배경 */
+        box-sizing: border-box; /* 패딩 포함 너비 계산 */
+    }
+    /* 버튼 스타일 */
+    input[type="submit"], button{
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+        font-weight: bold;
+        color: #555555;
+        background-color: #FFD1DC; /* 밝은 파스텔 분홍색 */
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 10px;
+        box-sizing: border-box; /* 패딩 포함 너비 계산 */
+    }
+
+    /* auth/delete의 취소버튼 */
+    a#cancel-button {
+        display: inline-block;    /* 가로, 세로 크기 조정 가능하게 만듦 */
+        width: 100%;
+        padding: 12px;
+        font-size: 15px;
+        font-weight: bold;
+        color: #555555;
+        background-color: #FFD1DC; /* 밝은 파스텔 분홍색 */
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 10px;
+        box-sizing: border-box; /* 패딩 포함 너비 계산 */
+        text-decoration: none;
+    }
+
+    /* 버튼 호버 효과 */
+    input[type="submit"]:hover, button:hover, a#cancel-button:hover {
+        background-color: #FFB6C1; /* 약간 진한 분홍색 */
+    }
+</style>
 <body>
     <div class="container">
         <h1>회원 탈퇴</h1>
@@ -27,9 +108,7 @@
             <p>정말로 회원 탈퇴를 하시겠습니까?</p>
             
             <button type="submit">탈퇴하기</button>
-
-            <a id="cancel-button" href="/auth/home">취소</a> <!-- 취소 버튼은 홈으로 리다이렉트 -->
         </form>
     </div>
-</body>
-</html>
+
+{% endblock %}

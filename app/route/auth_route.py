@@ -31,11 +31,12 @@ def login_user():
 
             # 로그인 성공 시 세션에 사용자 정보 저장 (예: 사용자 ID)
             session['user_id'] = user_info['id']
+            session['user_name'] = user_info['name']
 
             # 환영 메시지를 플래시로 추가
             flash(f'{user_info["name"]}님 환영합니다!')
 
-            return redirect(url_for('diary.diary_home'))  # 로그인 후 home 페이지로 리다이렉트
+            return redirect(url_for('diary.diary_home'))  # 로그인 후 diary 페이지로 리다이렉트
 
         except Exception as e:
             flash(f'오류 발생: {str(e)}')
@@ -151,7 +152,7 @@ def delete_user():
             session.pop('user_id', None)
             
             flash('회원 탈퇴가 완료되었습니다.')
-            return redirect(url_for('auth.signup_user'))  # 회원가입 페이지로 리다이렉트
+            return redirect(url_for('diary.diary_home'))  # 다이러리 홈 페이지로 리다이렉트
         
         except Exception as e:
             flash(f'오류 발생: {str(e)}')
