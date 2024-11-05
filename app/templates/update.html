@@ -98,12 +98,16 @@
         {% for message in messages %}
             <!-- "환영합니다" 또는 "insert" 문구가 포함된 플래시 메시지는 제외 -->
             {% if '환영합니다' not in message and 'insert' not in message %}
-            <li>{{ message }}</li>
+                {% if message == 'Update OK: 1 row(s) affected' %}
+                    <li>회원정보 수정이 완료되었습니다.</li>
+                {% else %}
+                    <li>{{ message }}</li>
+                {% endif %}
             {% endif %}
         {% endfor %}
         </ul>
     {% endif %}
-    {% endwith %}
+{% endwith %}
 
     <form action="/auth/update" method="POST">
         <table>
