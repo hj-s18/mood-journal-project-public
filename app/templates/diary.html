@@ -45,7 +45,7 @@
     /* 날짜 아이템에 호버 효과 추가 */
     .date-item:hover {
         background-color: #e0e0e0; /* 호버 시 배경색 변경 */
-        cursor:pointer; /* 포인터 커서 추가 */
+        cursor: pointer; /* 포인터 커서 추가 */
     }
 
     .date-item a {
@@ -65,7 +65,7 @@
         text-align: center;
     }
     
-    .emoji {
+    .mood {
         margin-left: 20px;
         font-size: 24px; /* 이모지 크기 */
     }
@@ -88,24 +88,27 @@
    <a href="/diary?year={{ year }}&month={{ month + 1 }}">&#9654;</a>
 </div>
 
-<div class="timeline">
-    <!-- 날짜 리스트 -->
-    <div class="date-list">
-        {% for day in days_in_month %}
-            <div class="date-item">
-                {% if day in diaries %}
-                    <a href="{{ url_for('diary.write_diary', id=diaries[day]['id'], year=year, month=month, day=day) }}">
-                        <span class="date-box">{{ '%02d' % month }}.{{ '%02d' % day }}</span> 
-                        <span class="mood">{{ diaries[day]['mood'] }}</span>
-                        <span class="message">{{ entries_dict[day]['message'] }}</span>
-                    </a>
-                {% else %}
-                    <!-- 일기가 없는 경우 -->
-                    <span class="date-box">{{ '%02d' % month }}.{{ '%02d' % day }}</span>
+{% for day in days_in_month %}
+    <div class="date-item">
+        {% set diary = diaries | selectattr('day', 'equalto', day) | first %}
+        <a href="{{ url_for('diary.write_diary', day=day, year=year, month=month, diary_id=diary['id'] if diary else None) }}">
+            <span class="date-box">{{ '%02d' % month }}.{{ '%02d' % day }}</span>
+
+            <span class="mood">
+                {% if diary %}
+                    {{ diary['mood'] }}
                 {% endif %}
-            </div>
-        {% endfor %}
+            </span>
+            <span class="message">
+                {% if diary %}
+                    {{ diary['body'] }}
+                {% endif %}
+            </span>
+        </a>
     </div>
- </div>
- {% endblock %}
- 
+{% endfor %}
+    
+    
+    </div>
+</div>
+{% endblock %}
