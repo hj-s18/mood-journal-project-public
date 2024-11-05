@@ -51,6 +51,7 @@ h2 {
 .attendance-table td input[type="checkbox"] {
     transform: scale(1.5);
     cursor: not-allowed;
+    accent-color: #FFB6C1; /* 체크박스 색상 변경 */
 }
 
 /* 오늘 출석 버튼 스타일 */
@@ -64,7 +65,7 @@ form button.save-button {
     border-radius: 8px;
     cursor: pointer;
     margin-top: 10px;
-    display: inline-block; /* 글자 수에 맞게 너비 조정 */
+    display: inline-block;
 }
 
 /* 호버 효과 */

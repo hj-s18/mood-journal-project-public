@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}업적{% endblock %}
+
+{% block content %}
+<div class="achievements-container">
+    <h2>내 업적</h2>
+
+    {% if achievements %}
+        <ul>
+            {% for achievement in achievements %}
+                <li><strong>{{ achievement[0] }}</strong>: {{ achievement[1] }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>아직 달성한 업적이 없습니다.</p>
+    {% endif %}
+</div>
+{% endblock %}

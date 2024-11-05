@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Flask 프로젝트{% endblock %}</title>
 
-    {% block head %}{% endblock %} <!-- 외부 CSS 및 추가 스타일을 위한 head 블록 -->
+    {% block head %}{% endblock %}
 
     <style>
         body {
@@ -19,7 +19,7 @@
             background-color: #f4f4f4;
             border-right: 1px solid #ccc;
             height: 100vh;
-            position: fixed; /* 메뉴 고정 */
+            position: fixed;
             top: 0;
             left: 0;
         }
@@ -35,14 +35,14 @@
             color: black;
             display: block;
             padding: 10px;
-            background-color: transparent; /* 기본 배경색 없음 */
+            background-color: transparent;
             border-radius: 5px;
         }
         .menu ul li a:hover {
-            background-color: #ddd; /* 마우스 오버 시 배경색 */
+            background-color: #ddd;
         }
         .content {
-            margin-left: 220px; /* 메뉴 너비만큼 오른쪽으로 밀림 */
+            margin-left: 220px;
             padding: 20px;
         }
     </style>
@@ -53,9 +53,9 @@
     <div class="menu">
         <h2>Home</h2>
         <ul>
-            <!-- 다른 페이지로의 링크 -->
             <li><a href="{{ url_for('diary.diary_home') }}">일기</a></li>
             <li><a href="{{ url_for('attendance.attendance_home') }}">출석 체크</a></li>
+            <li><a href="{{ url_for('achievements.achievements_home') }}">업적</a></li> <!-- 업적 메뉴 추가 -->
         </ul>
     </div>
 
