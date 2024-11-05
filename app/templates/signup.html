@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS 파일 적용 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+    <title>SIGNUP</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Signup</h1>
+
+        <!-- 회원가입 성공 또는 실패 시 사용자에게 적절한 메시지가 표시 -->
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul>
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+
+        <form action="/auth/signup" method="POST">
+            <table>
+                <tr>
+                  <td>Name</td>
+                  <td><input type="text" id="name" name="name" required></td>
+                </tr>
+
+                <tr>
+                    <td>e-mail</td>
+                    <td><input type="email" id="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password" name="password" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                      <button type="submit">회원가입</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS 파일 적용 -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+    <title>LOGIN</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Login</h1>
+
+        <!-- Flash 메시지 표시 -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <!-- "환영합니다" 문구가 포함된 플래시 메시지는 제외 -->
+                {% if '환영합니다' not in message %}
+                <li>{{ message }}</li>
+                {% endif %}
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endwith %}
+
+        <form action="/auth/login" method="POST">
+            <table>
+                <tr>
+                    <td>e-mail</td>
+                    <td><input type="email" id="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password" name="password" required></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="로그인"></input>
+                        <a href="/auth/signup"> 
+                            <button type="button">회원가입</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
