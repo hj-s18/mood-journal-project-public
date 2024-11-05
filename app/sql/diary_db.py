@@ -49,12 +49,12 @@ class DiaryDAO:
             db.close()
         return ret
     
-    def upsert_diary(self, user_id, mood, body, file_urls, date, id = None):
+    def upsert_diary(self, user_id, mood, body, date, id = None):
         db = DBConnect.get_db()
         cursor = db.cursor()
         sql_upsert = '''
-        insert into diaries (id, user_id, mood, body, file_urls, date)
-        values (%s, %s, %s, %s, %s, %s)
+        insert into diaries (id, user_id, mood, body, date)
+        values (%s, %s, %s, %s, %s)
         on duplicate key update
             user_id = VALUES(user_id),
             mood = VALUES(mood),
@@ -63,9 +63,9 @@ class DiaryDAO:
             date = VALUES(date)
         '''
         if id:
-            params = (id, user_id, mood, body, file_urls, date)
+            params = (id, user_id, mood, body, date)
         else :
-            params = (None, user_id, mood, body, file_urls, date)
+            params = (None, user_id, mood, body, date)
         
         try :    
             ret_cnt = cursor.execute(sql_upsert, params)
@@ -89,12 +89,7 @@ class DiaryDAO:
             print("delete Error :", e)
             db.rollback()
         finally :
-            db.close()
-        
-        
-        
-        
-        
+            db.close()        
 
     def get_list_diaries_with_date(self, user_id, year, month):
         start_date = f"{year}-{month}-01"
@@ -115,6 +110,7 @@ class DiaryDAO:
                     'mood' : row[2],
                     'body' : row[3],
                     'file_urls' : row[4],
+                    'day': row[5].day,
                     'date' : row[5]
                 }
                 ret.append(temp)
@@ -159,18 +155,30 @@ class DiaryDAO:
             
                 
                 
-    def get_diary(self):
+    def get_diary(self, id):
         ret = []
         db = DBConnect.get_db()
         cursor = db.cursor()
-        sql_select = 'select * from diaries'
+        sql_select = 'select * from diaries where id = %s'
         
-        # try :
+        try :
+            cursor.execute(sql_select,(id,))
+            row = cursor.fetchall()
+            ret = {
+                'id' : row[0][0],
+                'mood' : row[0][2],
+                'body' : row[0][3],
+                'file_urls' : row[0][4],
+                'date' : row[0][5]
+            }
             
-        # except Exception as e:
-        #     print("get_list_diaries_with_date Error :", e)
-        # finally :
-        #     db.close() 
+            return ret
+            
+        except Exception as e:
+            print("get_list_diaries_with_date Error :", e)
+        finally :
+            db.close() 
+            
             
             
                 
