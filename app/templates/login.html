@@ -11,19 +11,19 @@
     <div class="container">
         <h1>Login</h1>
 
-        <!-- Flash 메시지 표시 -->
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages %}
-                <!-- "환영합니다" 문구가 포함된 플래시 메시지는 제외 -->
-                {% if '환영합니다' not in message %}
-                <li>{{ message }}</li>
-                {% endif %}
-            {% endfor %}
-            </ul>
-        {% endif %}
-        {% endwith %}
+            <!-- Flash 메시지 표시 -->
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                {% for message in messages %}
+                    <!-- "환영합니다" 또는 "insert" 문구가 포함된 플래시 메시지는 제외 -->
+                    {% if '환영합니다' not in message and 'insert' not in message %}
+                    <li>{{ message }}</li>
+                    {% endif %}
+                {% endfor %}
+                </ul>
+            {% endif %}
+            {% endwith %}
 
         <form action="/auth/login" method="POST">
             <table>
