@@ -1,13 +1,17 @@
 import pymysql
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 class DBConnect:
     @classmethod
     def get_db(self):
         return pymysql.connect(
-            user="root",
-            passwd="test1234",
-            host="127.0.0.1",
-            db="mood_journal_project",
-            charset="utf8",
+            user=os.getenv("DB_USER"),
+            passwd=os.getenv("DB_PASSWORD"),
+            host=os.getenv("DB_HOST"),
+            db=os.getenv("DB_NAME"),
+            charset=os.getenv("DB_CHARSET"),
             autocommit=True,
         )
