@@ -5,11 +5,11 @@ from app.sql.db_connect import DBConnect
 def check_achievements(user_id):
     attendance_streak = get_attendance_streak(user_id)
     if attendance_streak >= 7:
-        award_achievement(user_id, '7 Days Login Streak')
+        award_achievement(user_id, '7리소스')
     if attendance_streak >= 15:
-        award_achievement(user_id, '15 Days Login Streak')
-    if attendance_streak >= 30:
-        award_achievement(user_id, '30 Days Login Streak')
+        award_achievement(user_id, '십오야')
+    if attendance_streak >= 31:
+        award_achievement(user_id, '배스킨라빈스')
 
     total_logins = get_total_logins(user_id)
     if total_logins >= 50:
