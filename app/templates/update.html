@@ -91,8 +91,8 @@
 <div class="container">
     <h1>회원정보 수정</h1>
 
-    <!-- Flash 메시지 표시 -->
-    {% with messages = get_flashed_messages() %}
+<!-- Flash 메시지 표시 -->
+{% with messages = get_flashed_messages() %}
     {% if messages %}
         <ul>
         {% for message in messages %}
@@ -100,6 +100,8 @@
             {% if '환영합니다' not in message and 'insert' not in message %}
                 {% if message == 'Update OK: 1 row(s) affected' %}
                     <li>회원정보 수정이 완료되었습니다.</li>
+                {% elif message == 'Update OK: 0 row(s) affected' %}
+                    <li>회원정보를 수정하세요.</li>
                 {% else %}
                     <li>{{ message }}</li>
                 {% endif %}
