@@ -113,18 +113,18 @@ def update_user():
         password = request.form.get('password')
         name = request.form.get('name')
 
-    if not email or not password or not name:
-        flash('모든 필드를 입력해야 합니다.')
-        return redirect(url_for('auth.update_user'))
+        if not email or not password or not name:
+            flash('모든 필드를 입력해야 합니다.')
+            return redirect(url_for('auth.update_user'))
 
-    try:
-        result = user_dao.update_user(user_id, email, password, name)  # 사용자 정보 업데이트
-        session['user_name'] = name  # 세션에 새로운 이름 저장
-        flash(result)
-        return redirect(url_for('auth.update_user'))  # 업데이트 후 다시 폼으로 리다이렉트
-    except Exception as e:
-        flash(f'오류 발생: {str(e)}')
-        return redirect(url_for('auth.update_user'))
+        try:
+            result = user_dao.update_user(user_id, email, password, name)  # 사용자 정보 업데이트
+            session['user_name'] = name  # 세션에 새로운 이름 저장
+            flash(result)
+            return redirect(url_for('auth.update_user'))  # 업데이트 후 다시 폼으로 리다이렉트
+        except Exception as e:
+            flash(f'오류 발생: {str(e)}')
+            return redirect(url_for('auth.update_user'))
         
 # 회원 탈퇴 폼과 회원 탈퇴 처리를 위한 GET/POST 통합 라우트
 @auth_bp.route('/delete', methods=['GET', 'POST'])
