@@ -1,0 +1,141 @@
+/* 전체 페이지 스타일 */
+body {
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #FFE4E1;
+}
+
+
+.header {
+    display: flex;
+    justify-content: center; /* 수평 중앙 정렬 */
+    align-items: center;     /* 수직 중앙 정렬 */
+    margin-bottom: 20px;
+    width: 100%;             /* 전체 너비 */
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #FFB6C1; /* 헤더 제목 색상 (분홍색) */
+}
+
+.diary-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.diary-form textarea {
+    width: 80%;
+    height: 200px;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #FFB6C1; /* 테두리 색상 (분홍색) */
+    background-color: #FFF; /* 텍스트 영역 배경색 (흰색) */
+}
+
+.diary-form button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #FF69B4; /* 저장 버튼 색상 (분홍색) */
+    color: white; /* 글자 색상 흰색 */
+    cursor: pointer;
+}
+
+.diary-form button.delete {
+    background-color: #FFD1DC; /* 삭제 버튼 색상 (분홍색) */
+}
+
+/* 이미지 선택 섹션 스타일링 */
+.image-selection {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.image-selection label {
+    margin-right: 15px; /* 이미지 간격 */
+}
+
+.image-selection img {
+    width: 50px; /* 이미지 크기 */
+    height: 50px; 
+    border-radius: 50%; /* 원형 이미지 */
+}
+
+.button-group {
+    display: flex;
+    justify-content: center; /* 버튼들을 중앙에 배치 */
+    gap: 10px; /* 버튼 간격 */
+}
+
+.button-group button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.button-group .delete {
+    background-color: #FFD1DC; /* 삭제 버튼 색상 (분홍색) */
+    color: #555555; /* 글자 색상 흰색으로 변경 */
+}
+
+.button-group button.save {
+    background-color: #FFD1DC; /* 저장 버튼 색상 (분홍색) */
+    color: #555555; /* 글자 색상 흰색으로 변경 */
+}
+
+
+
+/* 저장 버튼 호버 효과 */
+.diary-form button:hover {
+    background-color: #FFB6C1; /* 호버 시 저장 버튼 색상 (연한 분홍색) */
+}
+
+/* 삭제 버튼 호버 효과 */
+.button-group .delete:hover {
+    background-color: #FFB6C1; /* 호버 시 삭제 버튼 색상 (분홍색) */
+}
+
+/* 호버 효과
+form button.save-button:hover {
+    background-color: #FFB6C1;
+} */
+
+
+/* 이모티콘 및 메시지 스타일 */
+.mood {
+    margin-left: 20px;
+    font-size: 24px;
+    display: flex; /* 원을 세로로 정렬하기 위해 flex 사용 */
+    align-items: center; /* 세로 중앙 정렬 */
+}
+
+/* Mood 원 스타일 */
+.mood-circle {
+    width: 24px; /* 원의 크기 */
+    height: 24px; /* 원의 크기 */
+    border-radius: 50%; /* 원 모양 */
+    border: 2px solid #FFFFFF; /* 흰색 테두리 */
+    display: inline-block; /* 인라인 블록으로 설정 */
+    margin-right: 8px; /* 원과 숫자 간격 */
+}
+
+/* 각 mood 상태에 따른 색상 */
+.mood-0 { background-color: #FF6347; } /* Red */
+.mood-1 { background-color: #FFA500; } /* Orange */
+.mood-2 { background-color: #FFD700; } /* Yellow */
+.mood-3 { background-color: #90EE90; } /* Light Green */
+.mood-4 { background-color: #00BFFF; } /* Deep Sky Blue */

@@ -2,80 +2,11 @@
 
 {% block title %}일기 페이지{% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/diary.css') }}">
+{% endblock %}
+
 {% block content %}
-
-<!-- 인라인 CSS -->
-<style>
-    .header {
-        display: flex;
-        justify-content: center; /* 수평 중앙 정렬 */
-        align-items: center;     /* 수직 중앙 정렬 */
-        margin-bottom: 20px;
-        width: 100%;             /* 전체 너비 */
-    }
-    .header a {
-        margin: 0 20px;          /* 화살표와 년월 사이 간격 */
-        font-size: 24px;         /* 화살표 크기 */
-    }
-    .header h2 {
-        margin: 0;
-        font-size: 24px;
-    }
-
-    .timeline {
-        width: 100vw; /* 타임라인이 화면 전체 너비를 차지하도록 설정 */
-    }
-
-    .date-list {
-        width: 100vw; /* 날짜 리스트도 화면 전체 너비를 차지하도록 설정 */
-    }
-
-    .date-item {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100vw; /* 날짜 아이템이 화면 전체 너비를 차지하도록 설정 */
-        padding: 10px 20px; /* 여백을 유지하면서 클릭 가능한 영역을 확장 */
-        margin-bottom: 10px;
-        background-color: #f9f9f9;
-        border-radius: 8px;
-        transition: background-color 0.3s ease;
-    }
-
-    /* 날짜 아이템에 호버 효과 추가 */
-    .date-item:hover {
-        background-color: #e0e0e0; /* 호버 시 배경색 변경 */
-        cursor: pointer; /* 포인터 커서 추가 */
-    }
-
-    .date-item a {
-        text-decoration: none; /* 링크 밑줄 제거 */
-        color: inherit; /* 링크 텍스트 색상 상속 */
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-    }
-
-    .date-box {
-        width: 80px;
-        padding: 10px;
-        background-color: #ddd;
-        border-radius: 5px;
-        text-align: center;
-    }
-    
-    .mood {
-        margin-left: 20px;
-        font-size: 24px; /* 이모지 크기 */
-    }
-    
-    .message {
-        margin-left: 20px;
-        font-size: 16px; 
-        flex-grow: 1; /* 메시지가 길어질 때 유연하게 확장되도록 설정 */
-    }
-</style>
 
 <div class="header">
    <!-- 이전 버튼 -->
@@ -96,7 +27,8 @@
 
             <span class="mood">
                 {% if diary %}
-                    {{ diary['mood'] }}
+                    <span class="mood-circle mood-{{ diary['mood'] }}"></span> <!-- mood 원 추가 -->
+                    <!-- {{ diary['mood'] }} -->
                 {% endif %}
             </span>
             <span class="message">
@@ -107,8 +39,5 @@
         </a>
     </div>
 {% endfor %}
-    
-    
-    </div>
-</div>
+
 {% endblock %}

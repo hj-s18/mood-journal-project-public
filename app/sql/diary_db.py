@@ -155,7 +155,7 @@ class DiaryDAO:
             row = cursor.fetchall()
             ret = {
                 'id' : row[0][0],
-                'user_id': row[0][1],
+                'user_id' : row[0][1],
                 'mood' : row[0][2],
                 'body' : row[0][3],
                 'file_urls' : row[0][4],
