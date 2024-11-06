@@ -53,6 +53,7 @@ def write_diary(day):
             diary = DiaryDAO().get_diary(diary_id)
             if diary['user_id'] != user_id:
                 abort(403)
+                current_app.logger.error(f'ERROR_LOGGING >>>  {user_id}가 다른 일기 조회 시도')
         else:
             diary = None
                         

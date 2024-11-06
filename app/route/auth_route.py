@@ -1,4 +1,4 @@
-from flask import Blueprint, request, render_template, redirect, url_for, flash, session
+from flask import Blueprint, request, render_template, redirect, url_for, flash, session, current_app
 
 auth_bp = Blueprint('auth', __name__, url_prefix="/auth")
 
@@ -40,6 +40,7 @@ def login_user():
 
         except Exception as e:
             flash(f'오류 발생: {str(e)}')
+            current_app.logger.error('ERROR_LOGGING >>>', {e})
             return redirect(url_for('auth.login_user'))
         
 # 로그아웃 처리를 위한 POST 요청 처리
@@ -79,6 +80,7 @@ def signup_user():
             return redirect(url_for('auth.login_user'))  # 회원가입 완료 후 로그인 페이지로 리다이렉트
         except Exception as e:
             flash(f'오류 발생: {str(e)}')  # 오류 메시지 플래시
+            current_app.logger.error('ERROR_LOGGING >>>', {e})
             return redirect(url_for('auth.signup_user'))
 
 # 회원정보 수정 폼과 회원정보 수정을 위한 GET/POST 통합 라우트
@@ -105,6 +107,7 @@ def update_user():
         
         except Exception as e:
             flash(f'오류 발생: {str(e)}')
+            current_app.logger.error('ERROR_LOGGING >>>', {e})
             return redirect(url_for('auth.login_user'))
 
     # POST 요청: 회원정보 수정 처리
@@ -124,6 +127,7 @@ def update_user():
             return redirect(url_for('auth.update_user'))  # 업데이트 후 다시 폼으로 리다이렉트
         except Exception as e:
             flash(f'오류 발생: {str(e)}')
+            current_app.logger.error('ERROR_LOGGING >>>', {e})
             return redirect(url_for('auth.update_user'))
         
 # 회원 탈퇴 폼과 회원 탈퇴 처리를 위한 GET/POST 통합 라우트
@@ -156,4 +160,5 @@ def delete_user():
         
         except Exception as e:
             flash(f'오류 발생: {str(e)}')
+            current_app.logger.error('ERROR_LOGGING >>>', {e})
             return redirect(url_for('auth.delete_user'))  # 오류 발생 시 다시 폼으로 리다이렉트

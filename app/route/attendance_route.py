@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, session
+from flask import Blueprint, render_template, request, redirect, url_for, session, current_app
 from datetime import datetime, timedelta
 from app.sql.db_connect import DBConnect
 import pymysql
@@ -31,6 +31,7 @@ def mark_attendance():
         cursor.close()
     except Exception as e:
         print("DB Error:", e)
+        current_app.logger.error('ERROR_LOGGING >>>', {e})
     finally:
         db.close()
 
@@ -63,6 +64,7 @@ def get_week_dates(user_id=None):
         cursor.close()
     except Exception as e:
         print("DB Error:", e)
+        current_app.logger.error('ERROR_LOGGING >>>', {e})
         for i in range(7):
             current_day = start_of_week + timedelta(days=i)
             week_days.append({
