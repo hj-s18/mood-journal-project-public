@@ -5,7 +5,7 @@ from app.sql.db_connect import DBConnect
 def check_achievements(user_id):
     attendance_streak = get_attendance_streak(user_id)
     if attendance_streak >= 7:
-        award_achievement(user_id, '7리소스')
+        award_achievement(user_id, '칠리소스')
     if attendance_streak >= 15:
         award_achievement(user_id, '십오야')
     if attendance_streak >= 31:
@@ -13,24 +13,30 @@ def check_achievements(user_id):
 
     total_logins = get_total_logins(user_id)
     if total_logins >= 50:
-        award_achievement(user_id, 'Total 50 Logins')
+        award_achievement(user_id, '여의봉의 주인, 오공')
     if total_logins >= 100:
-        award_achievement(user_id, 'Total 100 Logins')
+        award_achievement(user_id, '축! 백일')
+    if total_logins >= 200:
+        award_achievement(user_id, '이백과 두보')
+    if total_logins >= 300:
+        award_achievement(user_id, '스파르타~!')
 
     diary_streak = get_diary_streak(user_id)
     if diary_streak >= 7:
-        award_achievement(user_id, 'Weekly Diary Streak')
+        award_achievement(user_id, '마음의 양식')
     if diary_streak >= 30:
-        award_achievement(user_id, 'Monthly Diary Streak')
+        award_achievement(user_id, '작가 지망생')
 
     total_diaries = get_total_diaries(user_id)
     if total_diaries >= 10:
-        award_achievement(user_id, '10 Diaries Written')
+        award_achievement(user_id, '텐텐')
     if total_diaries >= 50:
-        award_achievement(user_id, '50 Diaries Written')
+        award_achievement(user_id, '50가지 그림자')
+    if total_diaries >= 100:
+        award_achievement(user_id, '명명백백')
 
     if has_written_all_emotions(user_id):
-        award_achievement(user_id, 'Empathetic Soul')
+        award_achievement(user_id, '감성적인 영혼')
 
 def get_attendance_streak(user_id):
     db = DBConnect.get_db()
