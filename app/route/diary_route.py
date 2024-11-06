@@ -1,6 +1,7 @@
-from flask import *
+from flask import Blueprint, render_template, request, redirect, url_for, session, current_app, abort
 from datetime import datetime, timedelta
 from ..sql.diary_db import DiaryDAO
+from app.sql.achievements_db import check_achievements
 
 diary_bp = Blueprint('diary', __name__, url_prefix="/diary")
 
@@ -52,7 +53,7 @@ def write_diary(day):
         if diary_id:
             diary = DiaryDAO().get_diary(diary_id)
             if diary['user_id'] != user_id:
-                abort(403)
+                abort(403)  # 접근 권한이 없는 일기 접근 시 403 오류 발생
                 current_app.logger.error(f'ERROR_LOGGING >>>  {user_id}가 다른 일기 조회 시도')
         else:
             diary = None
@@ -72,7 +73,10 @@ def write_diary(day):
             # file_urls = request.form['file_urls']
             formatted_date = datetime(year, month, day).strftime('%Y-%m-%d')            
             DiaryDAO().upsert_diary(user_id, mood, body, formatted_date, diary_id)
-            # flash('일기가 성공적으로 저장되었습니다!', 'success')
+
+            # 업적 확인 함수 호출
+            check_achievements(user_id)
+
             return redirect(url_for('diary.diary_home', year=year, month=month))
 
         elif _method == "delete":
@@ -82,4 +86,3 @@ def write_diary(day):
 
             DiaryDAO().delete_diary(diary_id)
             return redirect(url_for('diary.diary_home', year=year, month=month))
-        
