@@ -126,7 +126,15 @@ body {
     font-style: normal;
   }
 
-div{
-    font-family: "Nanum Pen Script", Arial, sans-serif;
-    font-size: 30px;
+.header{
+    font-family: "Nanum Pen Script";
+    font-size: 26px;
+}
+.date-item{
+    font-family: "Nanum Pen Script";
+    font-size: 26px;
+}
+.message{
+    font-family: "Nanum Pen Script";
+    font-size: 26px;
 }

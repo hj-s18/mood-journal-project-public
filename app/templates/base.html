@@ -54,7 +54,6 @@
         h2 {
             text-align: center; /* 텍스트를 가운데 정렬 */
             font-size: 33px;
-            font-family: "Nanum Pen Script"
         }
         ul {
             text-align: center; /* 텍스트를 가운데 정렬 */
@@ -89,13 +88,17 @@
         font-weight: 400;
         font-style: normal;
         }
+        #main-h2{
+            font-family: "Nanum Pen Script";
+            font-size: 40px;
+        }
     </style>
 </head>
 <body>
 
     <!-- 왼쪽 고정된 메뉴 -->
     <div class="menu">
-        <h2><a href="/diary">감성한줄</a></h2>
+        <h2 id="main-h2"><a href="/diary">감성한줄</a></h2>
         <ul>
             <li id="name1">{{ session['user_name'] }}님의 Diary</li>
             <li><a href="{{ url_for('diary.diary_home') }}">일기</a></li>
