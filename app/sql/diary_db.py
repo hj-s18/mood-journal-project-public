@@ -8,6 +8,8 @@
 # from app.sql.db_connect import DBConnect
 import pymysql
 from app.sql.db_connect import DBConnect
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
         
 class DiaryDAO:
     
@@ -41,6 +43,7 @@ class DiaryDAO:
     def upsert_diary(self, user_id, mood, body, date, id = None):
         db = DBConnect.get_db()
         cursor = db.cursor()
+        print(date)
         sql_upsert = '''
         insert into diaries (id, user_id, mood, body, date)
         values (%s, %s, %s, %s, %s)
@@ -81,8 +84,13 @@ class DiaryDAO:
             db.close()        
 
     def get_list_diaries_with_date(self, user_id, year, month):
-        start_date = f"{year}-{month}-01"
-        end_date = f"{year}-{month + 1}-01"
+        # start_date = f"{year}-{month}-01"
+        # end_date = f"{year}-{month + 1}-01"
+
+        start_date = f"{year}-{month:02}-01"
+        start_date_dt = datetime(year, month, 1)
+        end_date_dt = start_date_dt + relativedelta(months=1)
+        end_date = end_date_dt.strftime("%Y-%m-%d")
 
         ret = []
         db = DBConnect.get_db()

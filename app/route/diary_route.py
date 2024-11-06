@@ -45,9 +45,6 @@ def write_diary(day):
     if 'user_id' not in session:
         return redirect(url_for('auth.login_user'))
     else:
-        year = request.args.get('year', datetime.now().year, type=int)
-        month = request.args.get('month', datetime.now().month, type=int)
-
         diary_id = request.args.get('diary_id', None)
         user_id = session['user_id']
         _method = request.form.get('_method', 'upsert')
@@ -60,18 +57,28 @@ def write_diary(day):
             diary = None
                         
         if request.method == 'GET':
+            year = request.args.get('year', datetime.now().year, type=int)
+            month = request.args.get('month', datetime.now().month, type=int)
+
             return render_template('write_diary.html', year=year, month=month, day=day, diary=diary)
         elif _method == "upsert":
+            year = int(request.form.get('year', datetime.now().year))
+            month = int(request.form.get('month', datetime.now().month))
+            day = int(request.form.get('day', datetime.now().day))
+
             mood = request.form['mood']
             body = request.form['body']
             # file_urls = request.form['file_urls']
-            formatted_date = datetime(year, month, int(day)).strftime('%Y-%m-%d')            
-
+            formatted_date = datetime(year, month, day).strftime('%Y-%m-%d')            
             DiaryDAO().upsert_diary(user_id, mood, body, formatted_date, diary_id)
             # flash('일기가 성공적으로 저장되었습니다!', 'success')
             return redirect(url_for('diary.diary_home', year=year, month=month))
 
         elif _method == "delete":
+            year = int(request.form.get('year', datetime.now().year))
+            month = int(request.form.get('month', datetime.now().month))
+            day = int(request.form.get('day', datetime.now().day))
+
             DiaryDAO().delete_diary(diary_id)
             return redirect(url_for('diary.diary_home', year=year, month=month))
         

@@ -54,6 +54,10 @@
       <!-- 저장을 위한 폼 -->
       <form method="POST" action="{{ url_for('diary.write_diary', day=day, diary_id=diary.id if diary else None) }}">
           <input type="hidden" name="_method" value="upsert">
+          <input type="hidden" name="year" value="{{ year }}">
+          <input type="hidden" name="month" value="{{ month }}">
+          <input type="hidden" name="day" value="{{ day }}">
+      
           <button type="submit" class="save">저장</button>
       </form>
 
@@ -61,6 +65,9 @@
       {% if diary %}
           <form method="POST" action="{{ url_for('diary.write_diary', day=day, diary_id=diary.id) }}">
               <input type="hidden" name="_method" value="delete">
+              <input type="hidden" name="year" value="{{ year }}">
+              <input type="hidden" name="month" value="{{ month }}">
+              <input type="hidden" name="day" value="{{ day }}">
               <button type="submit" class="delete">삭제</button>
           </form>
       {% endif %}
