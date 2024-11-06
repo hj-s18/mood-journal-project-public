@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
     <title>{% block title %}Flask 프로젝트{% endblock %}</title>
-
     {% block head %}{% endblock %}
 
     <style>
@@ -52,6 +54,7 @@
         h2 {
             text-align: center; /* 텍스트를 가운데 정렬 */
             font-size: 33px;
+            font-family: "Nanum Pen Script"
         }
         ul {
             text-align: center; /* 텍스트를 가운데 정렬 */
@@ -80,6 +83,11 @@
         li {
             font-size: 17px;
             font-family: sans-serif;
+        }
+        .nanum-pen-script-regular {
+        font-family: "Nanum Pen Script", cursive;
+        font-weight: 400;
+        font-style: normal;
         }
     </style>
 </head>

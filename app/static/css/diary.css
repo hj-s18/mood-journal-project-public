@@ -85,9 +85,9 @@ body {
 
 .message {
     margin-left: 20px;
-    font-size: 16px;
+    font-size: 24px;
     flex-grow: 1;
-    color: #555555;
+    color: black;
 }
 
 
@@ -119,3 +119,14 @@ body {
 .mood-2 { background-color: #FFD700; } /* Yellow */
 .mood-3 { background-color: #90EE90; } /* Light Green */
 .mood-4 { background-color: #00BFFF; } /* Deep Sky Blue */
+
+.nanum-pen-script-regular {
+    font-family: "Nanum Pen Script", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+div{
+    font-family: "Nanum Pen Script", Arial, sans-serif;
+    font-size: 30px;
+}

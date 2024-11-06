@@ -19,8 +19,9 @@ body {
 
 .header h2 {
     margin: 0;
-    font-size: 24px;
+    font-size: 40px;
     color: #FFB6C1; /* 헤더 제목 색상 (분홍색) */
+    font-family: "Nanum Pen Script";
 }
 
 .diary-form {
@@ -139,3 +140,9 @@ form button.save-button:hover {
 .mood-2 { background-color: #FFD700; } /* Yellow */
 .mood-3 { background-color: #90EE90; } /* Light Green */
 .mood-4 { background-color: #00BFFF; } /* Deep Sky Blue */
+
+.nanum-pen-script-regular {
+    font-family: "Nanum Pen Script", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
