@@ -47,7 +47,7 @@
         }
         h2 a {
             text-decoration: none;
-            color: black;
+            color: #F88CAE;
         }
         h2 {
             text-align: center; /* 텍스트를 가운데 정렬 */
@@ -60,8 +60,8 @@
             color: #C9AEF2;          /* 텍스트 색상을 파란색으로 설정 */
             font-weight: bold;    /* 텍스트를 굵게 설정 */
             padding: 10px;        /* 내부 여백을 10px로 설정 */
-            border-radius: 5px;
-            font-size: 20px;   /* 모서리를 둥글게 설정 */
+            border-radius: 5px;   /* 모서리를 둥글게 설정 */
+            font-size: 20px;   
         }
         .logout-button {
             border: none;
@@ -87,7 +87,7 @@
 
     <!-- 왼쪽 고정된 메뉴 -->
     <div class="menu">
-        <h2><a href="/diary">Home</a></h2>
+        <h2><a href="/diary">감성한줄</a></h2>
         <ul>
             <li id="name1">{{ session['user_name'] }}님의 Diary</li>
             <li><a href="{{ url_for('diary.diary_home') }}">일기</a></li>
