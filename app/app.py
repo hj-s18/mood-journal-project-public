@@ -18,7 +18,7 @@ def create_app():
     # 로깅 설정
     logger = logging.getLogger("logging_file")
     file_handler = TimedRotatingFileHandler(
-        f"logs/logging_file_{datetime.now().strftime("%Y-%m-%d")}.log",     # 로그 파일 경로
+        f"logs/logging_file_{datetime.now().strftime('%Y-%m-%d')}.log",     # 로그 파일 경로
         when="midnight",                # 매일 자정에 새로운 로그 파일 생성
         interval=1,                     # 1일마다 파일 생성
         backupCount=7                   # 7개의 백업 파일 유지
